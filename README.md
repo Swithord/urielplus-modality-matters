@@ -1,9 +1,15 @@
 ## Match the Modality, Mind the Transfer: Linguistically Calibrated Language Distances from URIEL+
 ### Source code for distance metrics
 
+### Installation
+All required packages are listed in `requirements.txt`. 
+
+### Querying language distances
 In `src/querying.py`, we provide classes to query language distances under each proposed representation, for each modality (geographic, genetic, typological). Example usage is provided in `examples.ipynb`.
 
-*Note:* The inputs to `compute_distance` are assumed to be Glottocodes, taken from [Glottolog](https://glottolog.org/) [1].
+*Note 1:* The inputs to `compute_distance` are assumed to be Glottocodes, taken from [Glottolog](https://glottolog.org/) [1].
+
+*Note 2:* Cell execution may take up to 30 seconds - 1 minute on first run.
 
 ### Supplementary code files
 - `src/speaker_geographic/functions.py` contains all helper functions for constructing speaker distributions from data, and computing the Wasserstein distance between distributions.

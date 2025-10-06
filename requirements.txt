@@ -1,0 +1,9 @@
+pandas~=2.3.3
+numpy~=2.3.3
+torch~=2.8.0
+networkx~=3.5
+scipy~=1.16.2
+pyproj~=3.7.2
+scikit-learn~=1.7.2
+tqdm~=4.67.1
+pot
