@@ -204,16 +204,18 @@ def node_introduction(
         top_k_pairs: int = 3
 ) -> Dict[str, Any]:
     """
-    Introduce a new latent node by splitting variables into two groups.
+    Given data (binary array of features in active set), introduce a new 
+    latent variable by splitting into two groups.
 
     Args:
-        data: Binary data matrix
+        data: Binary data matrix of features in active set
         model: Current latent class model
         mutual_info: Mutual information matrix
         top_k_pairs: Number of high-MI pairs to consider
 
     Returns:
-        Two-layer model with introduced node
+        Dictionary of Two-layer model containing model parameters associated
+        with the two latent variables
     """
     n_samples, n_features = data.shape
     best_model = None
@@ -275,7 +277,8 @@ def node_relocation(
         data: np.ndarray
 ) -> Dict[str, Any]:
     """
-    Relocate variables between groups to improve model fit.
+    Relocate variables between two groups in a two-layer model to improve model 
+    fit.
 
     Args:
         model: Current two-layer model
@@ -284,7 +287,7 @@ def node_relocation(
         data: Binary data matrix
 
     Returns:
-        Improved model after relocation
+        Improved two-layer model after relocation process
     """
     n_samples = data.shape[0]
     best_model = model
@@ -339,15 +342,15 @@ def learn_latent_tree_model(
         initial_model: Dict[str, Any]
 ) -> Dict[str, Any]:
     """
-    Learn a two-layer latent tree model.
+    Learn the best model for current data (one or two layer model)
 
     Args:
-        data: Binary data matrix
+        data: Binary data matrix of features in active set
         mutual_info: Mutual information matrix
         initial_model: Initial latent class model
 
     Returns:
-        Best latent tree model
+        Best latent variable model
     """
     best_model = initial_model
     best_bic = initial_model["bic"]
@@ -385,7 +388,9 @@ def bridged_islands(
         mutual_info: Pre-computed mutual information matrix (optional)
 
     Returns:
-        List of island dictionaries containing group indices and models
+        List of island dictionaries - each dictionary contains group indices 
+        (which features are clustered in an island) and model parameters
+        associated with the features in the island
     """
     n_samples, n_features = data.shape
     islands = []
