@@ -1,8 +1,8 @@
-## Match the Modality, Mind the Transfer: Linguistically Calibrated Language Distances from URIEL+
+## Modality Matching Matters: Calibrating Language Distances for Cross-Lingual Transfer in URIEL+
 ### Source code for distance metrics
 
 ### Installation
-All required packages are listed in `requirements.txt`. 
+All required packages are listed in `requirements.txt`. We recommend using Python 3.11.
 
 ### Querying language distances
 In `src/querying.py`, we provide classes to query language distances under each proposed representation, for each modality (geographic, genetic, typological). Example usage is provided in `examples.ipynb`.
