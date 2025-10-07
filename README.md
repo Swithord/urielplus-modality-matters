@@ -18,9 +18,9 @@ In `src/querying.py`, we provide classes to query language distances under each 
 
 ### Supplementary data files
 - `data/country_speaker_subset.csv` contains a subset of Ethnologue data containing language information, country centroids and per-country speaker counts for high- and medium-resource languages, as identified in URIEL+ [2].
-- `data/genetic_distance_matrix.csv` contains pre-computed distances between languages in hyperbolic space.
+- `data/genetic_embeddings.csv` contains the pre-trained hyperbolic embeddings for languages in Glottolog, learned from the Glottolog genealogy tree.
 - `data/genetic_adjacency_list.pkl` contains the adjacency list from the Glottolog genealogy tree, as used to learn hyperbolic embeddings.
-- `data/islands.pkl` contains pre-computed latent islands for the URIEL+ typological dataset.
+- `data/islands.pkl` contains the pre-computed latent islands model for the URIEL+ typological dataset.
 - `data/URIELPlus_Union_SoftImpute.csv` contains the URIEL+ typological dataset, taking union aggregation over sources, and with missing values imputed using SoftImpute.
 
 ## Licenses

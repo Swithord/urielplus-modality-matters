@@ -4,8 +4,11 @@ import pandas as pd
 import numpy as np
 from typing import Union
 
+import torch
+
 from src.latent_islands_typological.functions import compute_vector_distance
 from src.speaker_geographic.functions import integrate_geo_data, normalized_w1_distance
+from src.hyperbolic_genetic.geometry_ops import hyperboloid_dist
 
 GENETIC_DISTANCE_MAX = 32.123024 # Maximum pairwise genetic distance (for normalization)
 
@@ -53,20 +56,24 @@ class HyperbolicGeneticDistanceTool:
     A tool to query language distance.
     Modality: Genetic
     Representation: Hyperbolic embeddings
-    Note: This tool uses pre-computed distances.
+
+    Note: requires pre-trained hyperbolic space embeddings.
     """
     def __init__(self, dataset_path: str):
         """
         Initializes the HyperbolicGeneticDistanceTool.
         Args:
-            dataset_path (str): Path to the precomputed distance matrix CSV file.
+            dataset_path (str): Path to the hyperboloid embeddings CSV file.
         """
         super().__init__()
-        self.dist_map = pd.read_csv(dataset_path, index_col=0)
+        self.embeddings = pd.read_csv(dataset_path, index_col=0)
 
     def query_distance(self, lang1: str, lang2: str) -> Union[float, np.nan]:
         try:
-            return self.dist_map.loc[lang1, lang2] / GENETIC_DISTANCE_MAX
+            lang1_vec = torch.tensor(self.embeddings.loc[lang1].to_numpy(), dtype=torch.float32)
+            lang2_vec = torch.tensor(self.embeddings.loc[lang2].to_numpy(), dtype=torch.float32)
+            dist = hyperboloid_dist(lang1_vec, lang2_vec).item()
+            return dist / GENETIC_DISTANCE_MAX
         except KeyError:
             return np.nan
 
@@ -75,6 +82,8 @@ class IslandsTypologicalDistanceTool:
     A tool to query language distance.
     Modality: Typological
     Representation: Latent islands model
+
+    Note: requires the pre-computed latent islands model.
     """
     def __init__(self, dataset_path: str, islands_path: str):
         """
