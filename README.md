@@ -1,5 +1,6 @@
 ## Modality Matching Matters: Calibrating Language Distances for Cross-Lingual Transfer in URIEL+
 ### Source code for distance metrics
+*Authors: York Ng\*, Aditya Khan\*, James Lu\*, Matteo Salloum, Michael Zhou, Fiona Hoang, A. Seza Doğruöz, Annie Lee*
 
 ### Installation
 All required packages are listed in `requirements.txt`. We recommend using Python 3.11.
